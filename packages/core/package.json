@@ -1,6 +1,6 @@
 {
-  "name": "reactv",
-  "version": "1.0.0",
+  "name": "@zsbh/reactv",
+  "version": "0.0.2",
   "description": "",
   "main": "index.js",
   "types": "dist/index.d.ts",
