@@ -1,4 +1,5 @@
 {
+  "roorDir": ".",
   "compilerOptions": {
     "target": "ESNext",
     "useDefineForClassFields": true,
@@ -17,11 +18,12 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "skipLibCheck": true,
-    "jsxFactory": "h",
-    "jsxFragmentFactory": "Fragment",
-    "jsxImportSource": "reactv"
+    "jsx": "react-jsx",
+    // "jsxFactory": "jsx",
+    // "jsxFragmentFactory": "Fragment",
+    "jsxImportSource": "@reactv"
   },
   "include": [
     "src"
-  ]
+  ],
 }

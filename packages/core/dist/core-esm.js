@@ -1,1 +1,1 @@
-const o=(...o)=>{console.log("h():",o)};export{o as h};
+import{Fragment as e}from"@reactv/jsx-runtime";const o=(t,n)=>{if(console.log("render:",t),"TEXT_ELEMENT"===t.type){const e=document.createTextNode(t.props?.nodeValue);n.appendChild(e)}else if(t.type===e)for(const e of t.props?.children||[])o(e,n);else if(t.type instanceof Function){const e=t.type(t.props);o(e,n)}else{const e=document.createElement(t.type);for(const n of t.props?.children||[])o(n,e);n.appendChild(e)}};export{o as render};

@@ -1,2 +1,2 @@
-import './test';
-export declare const h: (...args: any) => void;
+import { VNode } from "@reactv/jsx-runtime";
+export declare const render: (element: VNode, container: HTMLElement) => void;

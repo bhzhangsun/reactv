@@ -1,1 +1,1 @@
-"use strict";exports.h=(...o)=>{console.log("h():",o)};
+"use strict";var e=require("@reactv/jsx-runtime");const t=(o,n)=>{if(console.log("render:",o),"TEXT_ELEMENT"===o.type){const e=document.createTextNode(o.props?.nodeValue);n.appendChild(e)}else if(o.type===e.Fragment)for(const e of o.props?.children||[])t(e,n);else if(o.type instanceof Function){const e=o.type(o.props);t(e,n)}else{const e=document.createElement(o.type);for(const n of o.props?.children||[])t(n,e);n.appendChild(e)}};exports.render=t;
