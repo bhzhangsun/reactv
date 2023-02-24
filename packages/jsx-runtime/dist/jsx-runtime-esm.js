@@ -1,1 +1,51 @@
-const e=(e,r,n)=>{let t=[];return t="string"==typeof r.children?[{type:"TEXT_ELEMENT",props:{nodeValue:r.children}}]:r.children instanceof Array?r.children.map((e=>"string"==typeof e?{type:"TEXT_ELEMENT",props:{nodeValue:e}}:e)):r.children,{type:e,props:{...r,children:t},key:n,ref:r.ref}},r=(r,n,t)=>e(r,n,t),n=(r,n,t)=>e(r,n,t),t="FRAGMENT_ELEMENT",l={"&":"amp","<":"lt",">":"gt",'"':"quot","'":"#39","/":"#x2F"},p=e=>String(e).replace(/[&<>"'\/\\]/g,(e=>`&${l[e]};`)),a=e=>({tabIndex:"tabindex",className:"class",readOnly:"readonly"}[e]||e);export{a as AttributeMapper,t as Fragment,l as entityMap,p as escapeHtml,e as jsx,n as jsxDEV,r as jsxs};
+function jsx(type, props, key) {
+    const shiftVNode = (children) => {
+        if (!(children instanceof Array)) {
+            children = [children];
+        }
+        return children.map((child) => {
+            if (typeof child === "object") {
+                return child;
+            }
+            return {
+                type: "TEXT_ELEMENT",
+                props: { nodeValue: child },
+            };
+        });
+    };
+    return {
+        type: type,
+        props: {
+            ...props,
+            children: shiftVNode(props.children),
+        },
+        key: key,
+    };
+}
+function jsxs(type, props, key) {
+    return jsx(type, props, key);
+}
+function jsxDEV(type, props, key) {
+    return jsx(type, props, key);
+}
+function Fragment(props) {
+    return props.children;
+}
+const entityMap = {
+    "&": "amp",
+    "<": "lt",
+    ">": "gt",
+    '"': "quot",
+    "'": "#39",
+    "/": "#x2F",
+};
+const escapeHtml = (str) => String(str).replace(/[&<>"'\/\\]/g, (s) => `&${entityMap[s]};`);
+// To keep some consistency with React DOM, lets use a mapper
+// https://reactjs.org/docs/dom-elements.html
+const AttributeMapper = (val) => ({
+    tabIndex: "tabindex",
+    className: "class",
+    readOnly: "readonly",
+}[val] || val);
+
+export { AttributeMapper, Fragment, entityMap, escapeHtml, jsx, jsxDEV, jsxs };

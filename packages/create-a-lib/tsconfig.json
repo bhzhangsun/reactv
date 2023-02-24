@@ -1,0 +1,7 @@
+{
+    "roorDir": ".",
+    "include": [
+        "src"
+    ],
+    "extends": "../../tsconfig.json"
+}

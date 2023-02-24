@@ -22,6 +22,6 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   </div>
 `;
 
-console.log("Index:", <Index></Index>);
-render(<Index></Index>, document.getElementById('app'))
+console.log("Index:", Index);
+render(<Index></Index>, document.getElementById('app')!)
 setupCounter(document.querySelector<HTMLButtonElement>("#counter")!);

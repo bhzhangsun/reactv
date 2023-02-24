@@ -1,19 +1,16 @@
 {
-    "include": [
-        "packages/*/src/**/*"
-    ],
-    "exclude": [
-        "packages/*/dist/**/*",
-        "node_modules",
-    ],
     "compilerOptions": {
-        "moduleResolution": "Node",
+        "moduleResolution": "nodenext",
         "target": "ESNext",
-        "noImplicitAny": true,
-        "removeComments": true,
-        "preserveConstEnums": true,
-        "allowJs": true,
-        "declaration": true,
-        "sourceMap": true
+        "module": "ESNext",
+        "lib": [
+            "ESNext",
+            "DOM"
+        ],
+        "strict": true,
+        "resolveJsonModule": true,
+        "noImplicitReturns": true,
+        "isolatedModules": false,
+        "skipLibCheck": true,
     },
 }

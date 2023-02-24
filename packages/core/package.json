@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/core-cjs.js",
   "module": "dist/core-esm.js",
-  "types": "dist/index.d.ts",
+  "types": "dist/core.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

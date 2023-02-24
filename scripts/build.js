@@ -19,7 +19,7 @@ async function build(target) {
 
 async function buildAll(maxpipe = 4) {
   const args = minimist(process.argv.slice(2));
-  const filters = (args["filters"] || "").split(",");
+  const filters = (args["targets"] || "").split(",");
   const packages = glob
     .sync(path.resolve(__dirname, "../packages/*/"))
     .filter((pkgDir) => {
@@ -33,7 +33,7 @@ async function buildAll(maxpipe = 4) {
       return true;
     })
     .map((item) => item.split("/").pop())
-    .filter((t) => filters.indexOf(t) < 0);
+    .filter((t) => filters.indexOf(t) > -1);
   console.log("--packages:", packages);
   const tasks = packages.map((target) => {
     const task = Promise.resolve()

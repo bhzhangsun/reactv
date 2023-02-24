@@ -1,1 +1,59 @@
-"use strict";const e=(e,t,r)=>{let p=[];return p="string"==typeof t.children?[{type:"TEXT_ELEMENT",props:{nodeValue:t.children}}]:t.children instanceof Array?t.children.map((e=>"string"==typeof e?{type:"TEXT_ELEMENT",props:{nodeValue:e}}:e)):t.children,{type:e,props:{...t,children:p},key:r,ref:t.ref}},t={"&":"amp","<":"lt",">":"gt",'"':"quot","'":"#39","/":"#x2F"};exports.AttributeMapper=e=>({tabIndex:"tabindex",className:"class",readOnly:"readonly"}[e]||e),exports.Fragment="FRAGMENT_ELEMENT",exports.entityMap=t,exports.escapeHtml=e=>String(e).replace(/[&<>"'\/\\]/g,(e=>`&${t[e]};`)),exports.jsx=e,exports.jsxDEV=(t,r,p)=>e(t,r,p),exports.jsxs=(t,r,p)=>e(t,r,p);
+'use strict';
+
+function jsx(type, props, key) {
+    const shiftVNode = (children) => {
+        if (!(children instanceof Array)) {
+            children = [children];
+        }
+        return children.map((child) => {
+            if (typeof child === "object") {
+                return child;
+            }
+            return {
+                type: "TEXT_ELEMENT",
+                props: { nodeValue: child },
+            };
+        });
+    };
+    return {
+        type: type,
+        props: {
+            ...props,
+            children: shiftVNode(props.children),
+        },
+        key: key,
+    };
+}
+function jsxs(type, props, key) {
+    return jsx(type, props, key);
+}
+function jsxDEV(type, props, key) {
+    return jsx(type, props, key);
+}
+function Fragment(props) {
+    return props.children;
+}
+const entityMap = {
+    "&": "amp",
+    "<": "lt",
+    ">": "gt",
+    '"': "quot",
+    "'": "#39",
+    "/": "#x2F",
+};
+const escapeHtml = (str) => String(str).replace(/[&<>"'\/\\]/g, (s) => `&${entityMap[s]};`);
+// To keep some consistency with React DOM, lets use a mapper
+// https://reactjs.org/docs/dom-elements.html
+const AttributeMapper = (val) => ({
+    tabIndex: "tabindex",
+    className: "class",
+    readOnly: "readonly",
+}[val] || val);
+
+exports.AttributeMapper = AttributeMapper;
+exports.Fragment = Fragment;
+exports.entityMap = entityMap;
+exports.escapeHtml = escapeHtml;
+exports.jsx = jsx;
+exports.jsxDEV = jsxDEV;
+exports.jsxs = jsxs;

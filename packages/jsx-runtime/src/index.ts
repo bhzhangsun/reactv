@@ -21,12 +21,13 @@ export namespace JSX {
 
 export type VNodeType = Function | string | "TEXT_ELEMENT";
 export type VNodeProps = {
-  children?: (VNode | string)[] | string;
+  children?: VNode[];
   nodeValue?: unknown;
   [key: string]: unknown;
 };
 export type FragmentProps = { children: VNode[] };
 export type VNodeRef = { current: Element };
+
 export type VNode = {
   type: VNodeType;
   props: VNodeProps;
@@ -34,50 +35,43 @@ export type VNode = {
   ref?: VNodeRef;
 };
 
-export const jsx = (type: VNodeType, props: VNodeProps, key: string) => {
-  let children: VNode[] = [];
-  if (typeof props.children === "string") {
-    children = [
-      {
-        type: "TEXT_ELEMENT",
-        props: { nodeValue: props.children },
-      },
-    ];
-  } else if (props.children instanceof Array) {
-    children = props.children.map((child) => {
-      if (typeof child === "string") {
-        return {
-          type: "TEXT_ELEMENT",
-          props: { nodeValue: child },
-        };
-      } else {
+export function jsx(type: VNodeType, props: VNodeProps, key: string): VNode {
+  const shiftVNode = (children: unknown) => {
+    if (!(children instanceof Array)) {
+      children = [children];
+    }
+    return (children as unknown[]).map((child) => {
+      if (typeof child === "object") {
         return child;
       }
+      return {
+        type: "TEXT_ELEMENT",
+        props: { nodeValue: child },
+      };
     });
-  } else {
-    children = props.children;
-  }
+  };
 
   return {
     type: type,
     props: {
       ...props,
-      children,
+      children: shiftVNode(props.children) as VNode[],
     },
     key: key,
-    ref: props.ref,
   };
-};
+}
 
-export const jsxs = (type: VNodeType, props: VNodeProps, key: string) => {
+export function jsxs(type: VNodeType, props: VNodeProps, key: string): VNode {
   return jsx(type, props, key);
-};
+}
 
-export const jsxDEV = (type: VNodeType, props: VNodeProps, key: string) => {
+export function jsxDEV(type: VNodeType, props: VNodeProps, key: string): VNode {
   return jsx(type, props, key);
-};
+}
 
-export const Fragment = "FRAGMENT_ELEMENT";
+export function Fragment(props: { children: unknown }) {
+  return props.children;
+}
 
 interface entityMapData {
   [key: string]: string;
