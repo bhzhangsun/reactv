@@ -11,6 +11,10 @@
 nr build targets=core
 nr build targets=%packageName%
 pnpm build targets=%packageName%
+
+# 发布
+nr release # 生成changelog
+pnpm publish # 发布npm包
 ```
 
 > 目前由于 core 包依赖 jsx-runtime, 需要先 build jsx-runtime
