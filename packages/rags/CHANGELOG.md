@@ -1,5 +1,11 @@
 # @zsbh/rags
 
+## 0.0.3
+
+### Patch Changes
+
+- fix: 修复命令执行
+
 ## 0.0.2
 
 ### Patch Changes
