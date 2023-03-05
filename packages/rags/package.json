@@ -1,5 +1,5 @@
 {
-  "name": "rags",
+  "name": "@zsbh/rags",
   "version": "0.0.2",
   "description": "",
   "bin": "dist/rags-cjs.js",

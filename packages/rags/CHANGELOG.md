@@ -1,4 +1,4 @@
-# rags
+# @zsbh/rags
 
 ## 0.0.2
 
