@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# husky v8 中-E 环境变量报错, 使用配置文件
+npx commitlint --config .commitlint.config.js -e -V

@@ -1,9 +1,8 @@
 {
-  "name": "@zsbh/create-a-lib",
+  "name": "rags",
   "version": "0.0.2",
   "description": "",
-  "main": "index.js",
-  "private": "true",
+  "bin": "dist/rags-cjs.js",
   "types": "dist/src/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,5 +12,10 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@types/yargs": "^17.0.22",
+    "chalk": "^5.2.0",
+    "yargs": "^17.7.1"
+  }
 }

@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# 判断是否已经添加 message, 未添加使用git-cz
+# shell条件前后不许添加空格
+if [ ! $2 ] 
+then
+    exec < /dev/tty && node_modules/.bin/git-cz --hook
+fi

@@ -20,10 +20,12 @@ async function build(target) {
 async function buildAll(maxpipe = 4) {
   const args = minimist(process.argv.slice(2));
   const filters = (args["targets"] || "").split(",");
+
   const packages = glob
     .sync(path.resolve(__dirname, "../packages/*/"))
     .filter((pkgDir) => {
       const pkg = require(path.resolve(pkgDir, "package.json"));
+
       if (
         pkg.private ||
         !fs.existsSync(path.resolve(pkgDir, "./src/index.ts"))
@@ -34,7 +36,7 @@ async function buildAll(maxpipe = 4) {
     })
     .map((item) => item.split("/").pop())
     .filter((t) => filters.indexOf(t) > -1);
-  console.log("--packages:", packages);
+  console.log("packages:", packages);
   const tasks = packages.map((target) => {
     const task = Promise.resolve()
       .then(() => build(target))
@@ -54,7 +56,6 @@ async function buildAll(maxpipe = 4) {
       );
     }
   }
-  console.log("building:", building);
   await Promise.all(building);
 }
 
